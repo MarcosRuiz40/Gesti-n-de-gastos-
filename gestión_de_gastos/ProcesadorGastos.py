@@ -7,9 +7,43 @@ import csv
 gastos = []
 encabezados = ['fecha', 'categoria', 'monto', 'descripcion']
 
+def eliminarGasto():
+    try:
+        if not gastos:
+            print("No hay gastos para eliminar.\n")
+            return
+        
+        mostrar_gastos()
+        
+        eliminar = int(input("Que elemento queres eliminar: ")) - 1
+        
+        gasto_borrado = gastos.pop(eliminar)
+        print(f"Se eliminó: {gasto_borrado['descripcion']} - ${gasto_borrado['monto']:.2f}\n")
+        
+        
+    except IndexError:
+        print("Valor invalido volver a ingresar otro.")
+        pass
+    except ValueError:
+        print("No se permiten letras solo numeros")
+        pass
+    
+
+def cargarCSV():
+    try:
+        with open("gastos.csv", "r", newline="", encoding="utf-8") as archivo:
+            leer = csv.DictReader(archivo)
+            for i in leer:
+                i["monto"] = float(i["monto"])
+                gastos.append(i)
+                # print(f"se cargaron {len(gastos)} gastos desde gastos.csv\n")
+    except FileExistsError:
+        pass
+    
+            
+            
 def exportar_csv():
     with open("gastos.csv", "w", newline="", encoding="utf-8") as archivo:
-        escribir = csv.writer(archivo)
         escribir_diccionario = csv.DictWriter(archivo ,fieldnames= encabezados)
         escribir_diccionario.writeheader()
         escribir_diccionario.writerows(gastos)
@@ -84,7 +118,8 @@ def mostrar_menu():
     print("3. Ver total gastado")
     print("4. Ver total por categoría")
     print("5. Exportar archivo")
-    print("6. Salir")
+    print("6. Eliminar gasto")
+    print("7. Salir")
 
 
 def main():
@@ -104,6 +139,8 @@ def main():
             case "5":
                 exportar_csv()
             case "6":
+                eliminarGasto()
+            case "7":
                 print("¡Listo! Nos vemos.")
                 break
             case _:
@@ -111,4 +148,5 @@ def main():
 
 
 if __name__ == "__main__":
+    cargarCSV()
     main()
