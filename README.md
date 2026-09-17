@@ -1,6 +1,7 @@
 # Gestión de gastos
 
 Programa de terminal en Python puro (sin librerías externas) para registrar y analizar gastos personales. Este proyecto fue realizado para practicar mis habilidades con el lenguaje Python, además de poder diseñar un programa de terminal que resuelva un problema real.
+17/09/2026 de añadió un CI/CD para que no se puedan subir errores al repositorio y así evitar errores sin resolver 
 
 ---
 
@@ -55,5 +56,5 @@ En progreso. Este README se irá actualizando a medida que se agreguen nuevas fu
 ### Tareas pendientes
 
 - [ ] Guardar y cargar los gastos desde un archivo para que persistan entre ejecuciones
-- [ ] Permitir editar o eliminar un gasto ya cargado
+- [x] Permitir eliminar un gasto ya cargado
 - [ ] Agregar más categorías o validación de categorías
